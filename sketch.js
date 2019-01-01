@@ -78,7 +78,7 @@ function draw() {
   text('balls : ' + (ballCount), 450, 670);
   text('time : ' + sec + '.' + msec, 450, 600);
   text('you : SUCK', 450, 635);
-  text("\"It is all about luck, you noob cunt.\"", 30, 40);
+  text("\"Visit chavincc github fam.\"", 30, 40);
   text("-Barack Obama", 320, 80);
 }
 
