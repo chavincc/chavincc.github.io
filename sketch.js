@@ -12,7 +12,7 @@ var sec = 0;
 var msec = 0;
 var autoSteer = 0;//off
 var release = true;
-var resetButton;
+var gameOn = true;
 
 function preload() {
   img = loadImage('images/mike.png');
@@ -35,7 +35,13 @@ function mousePressed(){
 		return;
 	}
 	released = false;
-  keyPressed();
+  //action
+  if (gameOn == true) {
+    keyPressed();
+  }
+  else {
+    resetGame();
+  }
 }
 
 function setup() {
@@ -46,12 +52,10 @@ function setup() {
   setInterval(timed, 10);
   setInterval(newBall, 1500);
   resetGame();
-  // resetButton = createButton('restart');
-  // resetButton.position(W*0.1, H*0.8);
-  // resetButton.mousePressed(resetGame);
 }
 
 function resetGame() {
+  gameOn = true;
   mainChar = new Mike(W, H, PI);
   mainChar.calculate();
   sec = 0;
@@ -80,10 +84,10 @@ function newBall() {
 
 function endGame() {
   fill(255, 0, 17);
+  gameOn = false;
   text('YOU KILL MIKE', 200, 350);
-  resetButton = createButton('restart');
-  resetButton.position(W*0.1, H*0.8);
-  resetButton.mousePressed(resetGame);
+  fill(0);
+  text('press anywhere to restart', 150, 385);
   noLoop();
 }
 
