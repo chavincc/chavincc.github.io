@@ -11,7 +11,8 @@ var maxSpeedIncreased = 0.5;
 var sec = 0;
 var msec = 0;
 var autoSteer = 0;//off
-
+var release = true;
+var resetButton;
 
 function preload() {
   img = loadImage('images/mike.png');
@@ -22,9 +23,19 @@ function keyPressed() {
   else if (dir == -1) dir = 1;
 }
 
-function mouseClicked() {
-  if (dir == 1) dir = -1;
-  else if (dir == -1) dir = 1;
+var released = true;
+
+function mouseReleased(){
+	released = true;
+	return false;
+}
+
+function mousePressed(){
+	if(!released){
+		return;
+	}
+	released = false;
+  keyPressed();
 }
 
 function setup() {
