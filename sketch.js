@@ -117,8 +117,8 @@ function draw() {
   text('balls : ' + (ballCount), 450, 670);
   text('time : ' + sec + '.' + msec, 450, 600);
   text('you : SUCK', 450, 635);
-  text("\"Visit chavincc github fam.\"", 30, 40);
-  text("-Barack Obama", 320, 80);
+  text("\"Visit chavincc github fam.\"", 40, 40);
+  text("-Barack Obama", 270, 80);
 }
 
 function Mike(W, H, pi) {
