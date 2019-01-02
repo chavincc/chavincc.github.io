@@ -40,11 +40,25 @@ function mousePressed(){
 
 function setup() {
   createCanvas(W+100, H);
-	mainChar = new Mike(W, H, PI);
-	mainChar.calculate();
+	// mainChar = new Mike(W, H, PI);
+	// mainChar.calculate();
   textSize(28);
   setInterval(timed, 10);
   setInterval(newBall, 1500);
+  resetGame();
+  resetButton = createButton('restart');
+  resetButton.position(W*0.1, H*0.8);
+  resetButton.mousePressed(resetGame);
+}
+
+function resetGame() {
+  mainChar = new Mike(W, H, PI);
+  mainChar.calculate();
+  sec = 0;
+  msec = 0;
+  ballCount = 0;
+  maxSpeed = 2.5;
+  loop();
 }
 
 function timed() {
