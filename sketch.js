@@ -11,19 +11,22 @@ var maxSpeedIncreased = 0.5;
 var sec = 0;
 var msec = 0;
 var autoSteer = 0;//off
-var release = true;
 var gameOn = true;
+var released = true;
 
 function preload() {
   img = loadImage('images/mike.png');
 }
 
 function keyPressed() {
-  if (dir == 1) dir = -1;
-  else if (dir == -1) dir = 1;
+  if (gameOn) {
+    if (dir == 1) dir = -1;
+    else if (dir == -1) dir = 1;
+  }
+  else {
+    resetGame();
+  }
 }
-
-var released = true;
 
 function mouseReleased(){
 	released = true;
@@ -36,18 +39,12 @@ function mousePressed(){
 	}
 	released = false;
   //action
-  if (gameOn == true) {
-    keyPressed();
-  }
-  else {
-    resetGame();
-  }
+  keyPressed();
 }
 
 function setup() {
   createCanvas(W+100, H);
-	// mainChar = new Mike(W, H, PI);
-	// mainChar.calculate();
+  frameRate(100);
   textSize(28);
   setInterval(timed, 10);
   setInterval(newBall, 1500);
@@ -92,7 +89,6 @@ function endGame() {
 }
 
 function draw() {
-  // background(250,128,114);
   background(255);
   fill(250, 138, 134);
   noStroke();
@@ -100,9 +96,6 @@ function draw() {
   for (var i = 0; i<ballCount; i++) {
     if (mainChar.intersect(obstacles[i])) {
       endGame();
-      // fill(255, 0, 17);
-      // text('YOU KILL MIKE', 200, 350);
-      // noLoop();
     }
   }
 	mainChar.move();
