@@ -46,9 +46,9 @@ function setup() {
   setInterval(timed, 10);
   setInterval(newBall, 1500);
   resetGame();
-  resetButton = createButton('restart');
-  resetButton.position(W*0.1, H*0.8);
-  resetButton.mousePressed(resetGame);
+  // resetButton = createButton('restart');
+  // resetButton.position(W*0.1, H*0.8);
+  // resetButton.mousePressed(resetGame);
 }
 
 function resetGame() {
@@ -78,6 +78,15 @@ function newBall() {
   maxSpeed = maxSpeed + maxSpeedIncreased;
 }
 
+function endGame() {
+  fill(255, 0, 17);
+  text('YOU KILL MIKE', 200, 350);
+  resetButton = createButton('restart');
+  resetButton.position(W*0.1, H*0.8);
+  resetButton.mousePressed(resetGame);
+  noLoop();
+}
+
 function draw() {
   // background(250,128,114);
   background(255);
@@ -86,9 +95,10 @@ function draw() {
   ellipse(W/2, H/2, H*0.25 + 300, H*0.25 + 300);
   for (var i = 0; i<ballCount; i++) {
     if (mainChar.intersect(obstacles[i])) {
-      fill(255, 0, 17);
-      text('YOU KILL MIKE', 200, 350);
-      noLoop();
+      endGame();
+      // fill(255, 0, 17);
+      // text('YOU KILL MIKE', 200, 350);
+      // noLoop();
     }
   }
 	mainChar.move();
