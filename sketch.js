@@ -1,10 +1,10 @@
-var W = 600;
-var H = 700;
+var W;
+var H;
 var mainChar;
 var dir = 1;//clockwise
 var ballCount = 0;
 var img;
-var imgBorder = 40;
+var imgBorder;
 let obstacles = [];
 var maxSpeed = 2.5;
 var maxSpeedIncreased = 0.5;
@@ -43,9 +43,12 @@ function mousePressed(){
 }
 
 function setup() {
-  createCanvas(W+100, H);
+  W = displayWidth;
+  H = displayHeight;
+  imgBorder = W*0.1;
+  createCanvas(W, H);
   frameRate(100);
-  textSize(28);
+  textSize(20);
   setInterval(timed, 10);
   setInterval(newBall, 1500);
   resetGame();
@@ -53,7 +56,8 @@ function setup() {
 
 function resetGame() {
   gameOn = true;
-  mainChar = new Mike(W, H, PI);
+  obstacles = [];
+  mainChar = new Mike(W, H);
   mainChar.calculate();
   sec = 0;
   msec = 0;
@@ -80,11 +84,14 @@ function newBall() {
 }
 
 function endGame() {
+  fill(250, 138, 134);
+  ellipse(W/2, H/2, H*0.012);
   fill(255, 0, 17);
   gameOn = false;
-  text('YOU KILL MIKE', 200, 350);
+  textAlign(CENTER);
+  text('YOU KILL MIKE', W/2, H/2);
   fill(0);
-  text('press anywhere to restart', 150, 385);
+  text('press anywhere to restart', W/2, H*0.57);
   noLoop();
 }
 
@@ -92,7 +99,9 @@ function draw() {
   background(255);
   fill(250, 138, 134);
   noStroke();
-  ellipse(W/2, H/2, H*0.25 + 300, H*0.25 + 300);
+  ellipse(W/2, H/2, W*0.95);
+  fill(255);
+  ellipse(W/2, H/2, H*0.012);
   for (var i = 0; i<ballCount; i++) {
     if (mainChar.intersect(obstacles[i])) {
       endGame();
@@ -107,20 +116,21 @@ function draw() {
     obstacles[i].show();
   }
   fill(0)
-  text('balls : ' + (ballCount), 450, 670);
-  text('time : ' + sec + '.' + msec, 450, 600);
-  text('you : SUCK', 450, 635);
-  text("\"Visit chavincc github fam.\"", 40, 40);
-  text("-Barack Obama", 270, 80);
+  textAlign(LEFT);
+  text("\"Visit chavincc github fam.\"", W*0.07, H*0.07);
+  text("-Barack Obama", W*0.5, H*0.12);
+  text('balls : ' + (ballCount), W*0.6, H*0.82);
+  text('time : ' + sec + '.' + msec, W*0.6, H*0.92);
+  text('you : SUCK', W*0.6, H*0.87);
 }
 
-function Mike(W, H, pi) {
+function Mike(W, H) {
   this.xCen = W/2;
   this.yCen = H/2;
-  this.angle = pi*0.75;
+  this.angle = PI*0.75;
   this.angularSpeed = 0.03;
-  this.tunnelR = H*0.25;
-  this.mainR = 70;
+  this.tunnelR = W*0.45;
+  this.mainR = W*0.18;
   this.x = 0;
   this.y = 0;
 
@@ -149,7 +159,7 @@ function Mike(W, H, pi) {
 
   this.near = function(other) {
     let d = dist(this.x, this.y, other.x, other.y);
-    if (d < this.mainR + other.r - imgBorder + 15) {
+    if (d < this.mainR + other.r - imgBorder + 10) {
       return true;
     }
     return false;
@@ -165,15 +175,15 @@ function Mike(W, H, pi) {
 }
 
 function BadBall() {
-  this.x = W/2;
-  this.y = H/2;
+  this.x = W*0.5;
+  this.y = H*0.5;
   this.MS = maxSpeed;
   this.xSpeed = random(-maxSpeed, maxSpeed);
   this.ySpeed = random(-maxSpeed, maxSpeed);
-  this.r = 10;
+  this.r = H*0.012;
 
   this.move = function() {
-    if (this.x <= 0 || this.x >= W+90) {
+    if (this.x <= 0 || this.x >= W) {
       this.xSpeed = -this.xSpeed;
     }
     if (this.y <= 0 || this.y >= H) {
@@ -188,4 +198,5 @@ function BadBall() {
     noStroke();
     ellipse(this.x, this.y, this.r, this.r);
   }
+
 }
