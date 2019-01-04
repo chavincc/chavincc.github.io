@@ -85,7 +85,7 @@ function newBall() {
 
 function endGame() {
   fill(250, 138, 134);
-  ellipse(W/2, H/2, H*0.012);
+  ellipse(W/2, H/2, W*0.026);
   fill(255, 0, 17);
   gameOn = false;
   textAlign(CENTER);
