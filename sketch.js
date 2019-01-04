@@ -6,8 +6,8 @@ var ballCount = 0;
 var img;
 var imgBorder;
 let obstacles = [];
-var maxSpeed = 2.5;
-var maxSpeedIncreased = 0.5;
+var maxSpeed = 2.25;
+var maxSpeedIncreased = 0.25;
 var sec = 0;
 var msec = 0;
 var autoSteer = 0;//off
@@ -50,19 +50,20 @@ function setup() {
   frameRate(100);
   textSize(20);
   setInterval(timed, 10);
-  setInterval(newBall, 1500);
+  setInterval(newBall, 2500);
   resetGame();
 }
 
 function resetGame() {
   gameOn = true;
-  obstacles = [];
+  obstacles.length = 0;
   mainChar = new Mike(W, H);
   mainChar.calculate();
   sec = 0;
   msec = 0;
   ballCount = 0;
   maxSpeed = 2.5;
+  newBall();
   loop();
 }
 
@@ -85,13 +86,13 @@ function newBall() {
 
 function endGame() {
   fill(250, 138, 134);
-  ellipse(W/2, H/2, W*0.026);
+  ellipse(W/2, H*0.4, W*0.02);
   fill(255, 0, 17);
   gameOn = false;
   textAlign(CENTER);
-  text('YOU KILL MIKE', W/2, H/2);
+  text('YOU KILL MIKE', W/2, H*0.4);
   fill(0);
-  text('press anywhere to restart', W/2, H*0.57);
+  text('press anywhere to restart', W/2, H*0.47);
   noLoop();
 }
 
@@ -99,9 +100,9 @@ function draw() {
   background(255);
   fill(250, 138, 134);
   noStroke();
-  ellipse(W/2, H/2, W*0.95);
+  ellipse(W/2, H*0.4, W*0.95);
   fill(255);
-  ellipse(W/2, H/2, W*0.026);
+  ellipse(W/2, H*0.4, W*0.02);
   for (var i = 0; i<ballCount; i++) {
     if (mainChar.intersect(obstacles[i])) {
       endGame();
@@ -115,18 +116,21 @@ function draw() {
   for (var i = 0; i<ballCount; i++) {
     obstacles[i].show();
   }
-  fill(0)
+  fill(30, 30, 30);
+  rect(0, H*0.8, W, H*0.2);
+  textAlign(CENTER);
+  fill(255);
+  text("\" big phone + luck = easy game. \"", W*0.5, H*0.86);
   textAlign(LEFT);
-  text("\"Visit chavincc github fam.\"", W*0.072, H*0.07);
-  text("-Barack Obama", W*0.5, H*0.12);
-  text('balls : ' + (ballCount), W*0.6, H*0.82);
-  text('time : ' + sec + '.' + msec, W*0.6, H*0.92);
-  text('you : SUCK', W*0.6, H*0.87);
+  text("-Albert Einstein", W*0.5, H*0.93);
+  fill(0)
+  text('balls : ' + (ballCount), W*0.6, H*0.07);
+  text('time : ' + sec + '.' + msec, W*0.6, H*0.12);
 }
 
 function Mike(W, H) {
   this.xCen = W/2;
-  this.yCen = H/2;
+  this.yCen = H*0.4;
   this.angle = PI*0.75;
   this.angularSpeed = 0.03;
   this.tunnelR = W*0.45;
@@ -176,17 +180,17 @@ function Mike(W, H) {
 
 function BadBall() {
   this.x = W*0.5;
-  this.y = H*0.5;
+  this.y = H*0.4;
   this.MS = maxSpeed;
   this.xSpeed = random(-maxSpeed, maxSpeed);
   this.ySpeed = random(-maxSpeed, maxSpeed);
-  this.r = W*0.026;
+  this.r = W*0.02;
 
   this.move = function() {
     if (this.x <= 0 || this.x >= W) {
       this.xSpeed = -this.xSpeed;
     }
-    if (this.y <= 0 || this.y >= H) {
+    if (this.y <= 0 || this.y >= H*0.8) {
       this.ySpeed = -this.ySpeed;
     }
     this.x = this.x + this.xSpeed;
