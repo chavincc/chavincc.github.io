@@ -101,7 +101,7 @@ function draw() {
   noStroke();
   ellipse(W/2, H/2, W*0.95);
   fill(255);
-  ellipse(W/2, H/2, H*0.012);
+  ellipse(W/2, H/2, W*0.026);
   for (var i = 0; i<ballCount; i++) {
     if (mainChar.intersect(obstacles[i])) {
       endGame();
@@ -117,7 +117,7 @@ function draw() {
   }
   fill(0)
   textAlign(LEFT);
-  text("\"Visit chavincc github fam.\"", W*0.07, H*0.07);
+  text("\"Visit chavincc github fam.\"", W*0.072, H*0.07);
   text("-Barack Obama", W*0.5, H*0.12);
   text('balls : ' + (ballCount), W*0.6, H*0.82);
   text('time : ' + sec + '.' + msec, W*0.6, H*0.92);
@@ -180,7 +180,7 @@ function BadBall() {
   this.MS = maxSpeed;
   this.xSpeed = random(-maxSpeed, maxSpeed);
   this.ySpeed = random(-maxSpeed, maxSpeed);
-  this.r = H*0.012;
+  this.r = W*0.026;
 
   this.move = function() {
     if (this.x <= 0 || this.x >= W) {
