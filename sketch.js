@@ -10,30 +10,36 @@ var maxSpeed = 2.25;
 var maxSpeedIncreased = 0.25;
 var sec = 0;
 var msec = 0;
-var autoSteer = 0;//off
-var gameOn = true;
+var gameStage = 0;//0=mainMenu 1=gameOn 2=gameEnded
 var released = true;
+var firebaseDb;
+var dbScoreRef;
+var nameInput;
+var highScore = 0;
 
 function preload() {
   img = loadImage('images/mike.png');
 }
 
 function keyPressed() {
-  if (gameOn) {
+  if (gameStage == 1) {
     if (dir == 1) dir = -1;
     else if (dir == -1) dir = 1;
   }
-  else {
+  else if (gameStage == 2) {
     resetGame();
+  }
+  else if (gameStage == 3) {
+    // TODO: main menu click function
   }
 }
 
-function mouseReleased(){
+function mouseReleased() {
 	released = true;
 	return false;
 }
 
-function mousePressed(){
+function mousePressed() {
 	if(!released){
 		return;
 	}
@@ -42,7 +48,25 @@ function mousePressed(){
   keyPressed();
 }
 
+function menu() {
+  noLoop();
+
+}
+
+
 function setup() {
+  var config = {
+    apiKey: "AIzaSyC8bF4OGOvtHHxZj0G_QYZZ08ebeDtyzbk",
+    authDomain: "the-mike-game.firebaseapp.com",
+    databaseURL: "https://the-mike-game.firebaseio.com",
+    projectId: "the-mike-game",
+    storageBucket: "the-mike-game.appspot.com",
+    messagingSenderId: "527097926733"
+  };
+  firebase.initializeApp(config);
+  firebaseDb = firebase.database();
+  dbScoreRef = firebaseDb.ref('scores');
+
   W = displayWidth;
   H = displayHeight;
   imgBorder = W*0.1;
@@ -55,7 +79,7 @@ function setup() {
 }
 
 function resetGame() {
-  gameOn = true;
+  gameStage = 1;
   obstacles.length = 0;
   mainChar = new Mike(W, H);
   mainChar.calculate();
@@ -85,10 +109,18 @@ function newBall() {
 }
 
 function endGame() {
+  // var data = {
+  //   name: 'nicky',
+  //   score: sec + msec/100
+  // }
+  // dbScoreRef.push(data);
+  if (sec+msec/100 > highScore) {
+    highScore = sec + msec/100;
+  }
   fill(250, 138, 134);
   ellipse(W/2, H*0.4, W*0.02);
   fill(255, 0, 17);
-  gameOn = false;
+  gameStage = 2;
   textAlign(CENTER);
   text('YOU KILL MIKE', W/2, H*0.4);
   fill(0);
@@ -123,9 +155,10 @@ function draw() {
   text("\" big phone + luck = easy game. \"", W*0.5, H*0.86);
   textAlign(LEFT);
   text("-Albert Einstein", W*0.5, H*0.93);
-  fill(0)
+  fill(0);
   text('balls : ' + (ballCount), W*0.6, H*0.07);
   text('time : ' + sec + '.' + msec, W*0.6, H*0.12);
+  text('highscore : ' + highScore, W*0.1, H*0.7);
 }
 
 function Mike(W, H) {
@@ -140,21 +173,22 @@ function Mike(W, H) {
 
   this.show = function() {
     //ellipse(this.x, this.y, this.mainR, this.mainR);
-    imageMode(CENTER)
+    imageMode(CENTER);
     image(img,this.x,this.y, this.mainR, this.mainR);
   }
 
   this.move = function() {
     this.angle += this.angularSpeed*dir;
     this.calculate();
-    if (autoSteer > 0) {
-      for (var i = 0; i<ballCount; i++) {
-        if (this.near(obstacles[i])) {
-          this.move();
-        }
+	}
+
+  this.autopilot = function() {
+    for(var i = 0; i<ballCount; i++) {
+      if (this.near(obstacles[i])) {
+        keyPressed();
       }
     }
-	}
+  }
 
   this.calculate = function() {
     this.x = this.xCen + this.tunnelR*cos(this.angle);
@@ -163,7 +197,7 @@ function Mike(W, H) {
 
   this.near = function(other) {
     let d = dist(this.x, this.y, other.x, other.y);
-    if (d < this.mainR + other.r - imgBorder + 10) {
+    if (d < this.mainR + other.r - imgBorder + 20) {
       return true;
     }
     return false;
