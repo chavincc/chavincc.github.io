@@ -32,8 +32,6 @@ class UI {
   }
 
   static showTime(time) {
-    const strmin = time.minute < 10 ? '0' + time.minute : time.minute;
-    const strsec = time.second < 10 ? '0' + time.second : time.second;
-    $('current-time-display').innerHTML = `${strmin}:${strsec}`;
+    $('current-time').innerHTML = `${time.minute}:${time.second}`;
   }
 }

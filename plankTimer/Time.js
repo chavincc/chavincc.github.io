@@ -18,21 +18,14 @@ class Time {
   }
 
   tick() {
-    if (this.minute === 0 && this.second === 0) return true;
-    else {
-      if (this.second === 0) {
-        this.minute--;
-        this.second = 59;
-      } else {
-        this.second--;
-      }
-      console.log('ok');
-      UI.showTime(this);
-      return false;
+    if (this.second === 0) {
+      this.minute--;
+      this.second = 59;
     }
   }
 
-  totalTime() {
-    return this.defMinute * 60 + this.defSecond;
+  reset() {
+    this.minute = this.defMinute;
+    this.second = this.defSecond;
   }
 }

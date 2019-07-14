@@ -10,53 +10,26 @@ $('view-example-btn').addEventListener('click', function() {
   showingExample = !showingExample;
 });
 
+const prepareTime = new Time(0, 10);
+let setsCount, plankLength, sidePlankLength, restLength;
 $('start-btn').addEventListener('click', function(e) {
   e.preventDefault();
   try {
     setsCount = parseInt($('number-of-sets').value);
     if (setsCount <= 0) throw new Error('no set');
-
-    const timeArray = [new Time(0, 10)];
-    for (let i = 0; i < setsCount; i++) {
-      timeArray.push(
-        new Time(
-          $('plank-duration-minute').value,
-          $('plank-duration-second').value
-        )
-      );
-      timeArray.push(
-        new Time(
-          $('side-plank-duration-minute').value,
-          $('side-plank-duration-second').value
-        )
-      );
-      timeArray.push(
-        new Time(
-          $('side-plank-duration-minute').value,
-          $('side-plank-duration-second').value
-        )
-      );
-      timeArray.push(
-        new Time(
-          $('plank-duration-minute').value,
-          $('plank-duration-second').value
-        )
-      );
-      timeArray.push(
-        new Time(
-          $('rest-between-sets-minute').value,
-          $('rest-between-sets-second').value
-        )
-      );
-    }
-    const clock = new Clock(timeArray);
-    console.log(clock);
-
-    let x = setInterval(function() {
-      console.log('x');
-      if (clock.tick()) clearInterval(x);
-    }, 150);
-
+    plankLength = new Time(
+      $('plank-duration-minute').value,
+      $('plank-duration-second').value
+    );
+    sidePlankLength = new Time(
+      $('side-plank-duration-minute').value,
+      $('side-plank-duration-second').value
+    );
+    restLength = new Time(
+      $('rest-between-sets-minute').value,
+      $('rest-between-sets-second').value
+    );
+    // console.log(setsCount, plankLength, sidePlankLength, restLength);
     UI.enlargeClock();
   } catch (error) {
     alert(error);
