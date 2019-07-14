@@ -4,6 +4,12 @@ const count3 = new Audio('sound/count3.mp3');
 const count4 = new Audio('sound/count4.mp3');
 const count5 = new Audio('sound/count5.mp3');
 const count10 = new Audio('sound/count10.mp3');
+count1.load();
+count2.load();
+count3.load();
+count4.load();
+count5.load();
+count10.load();
 function playTarget(target) {
   target.play();
 }
@@ -12,7 +18,6 @@ let clock;
 
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
-  playTarget(count5);
   if (showingExample) {
     $('example').style.display = 'none';
     $('view-example-btn').innerHTML = 'view example';
