@@ -92,16 +92,9 @@ $('start-btn').addEventListener('click', function(e) {
 
     x = setInterval(function() {
       console.log('x');
-      if (clock.tick().stop) {
+      if (clock.tick()) {
         clearInterval(x);
         UI.minimizeClock();
-      } else {
-        if (clock.tick().stop === 10) count10.play();
-        if (clock.tick().stop === 5) count5.play();
-        if (clock.tick().stop === 4) count4.play();
-        if (clock.tick().stop === 3) count3.play();
-        if (clock.tick().stop === 2) count2.play();
-        if (clock.tick().stop === 1) count1.play();
       }
     }, 1000);
 
