@@ -5,40 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Plank Timer</title>
+    <link rel="stylesheet" href="plankTimer.css" />
+    <script src="https://kit.fontawesome.com/9d28c9b066.js"></script>
   </head>
   <body>
     <header id="intro">
+      <section id="nav">
+        <div class="container no-size">
+          <div class="font">Plank Timer</div>
+        </div>
+      </section>
       <section id="intro-description">
-        <div class="container">
-          <h1>PLANK TIMER</h1>
-          <p>not used to the excercise?</p>
-          <button class="btn btn-secondary" id="view-example-btn">
+        <div class="container" id="helper">
+          <p class="light">not used to the excercise?</p>
+          <button class="btn btn-primary" id="view-example-btn">
             view example
           </button>
-          <p>2 sets</p>
+        </div>
+        <div class="container" id="example">
+          <p class="group-lead">group 1</p>
           <ul class="combo-excercise">
-            <p>group 1</p>
-            <li>plank</li>
-            <li>side plank left</li>
-            <li>side plank right</li>
-            <li>plank</li>
+            <li class="grid-group-1">plank</li>
+            <li class="grid-group-1">side plank left</li>
+            <li class="grid-group-1">side plank right</li>
+            <li class="grid-group-1">plank</li>
             <li class="rest">rest</li>
           </ul>
+          <p class="group-lead">group 2</p>
           <ul class="combo-excercise">
-            <p>group 2</p>
-            <li>crunch kicks + pulse-up</li>
-            <li>push ups</li>
+            <li class="grid-group-2">crunch kicks + pulse-up</li>
+            <li class="grid-group-2">push ups</li>
             <li class="rest">rest</li>
           </ul>
+          <p class="group-lead">2 sets</p>
           <div class="grid-example">
-            <p>group 1</p>
-            <p>rest</p>
-            <p>group 1</p>
-            <p>rest</p>
-            <p>group 2</p>
-            <p>rest</p>
-            <p>group 2</p>
-            <p>rest</p>
+            <p class="grid-group-1">group1</p>
+            <p class="rest">rest</p>
+            <p class="grid-group-1">group1</p>
+            <p class="rest">rest</p>
+            <p class="grid-group-2">group2</p>
+            <p class="rest">rest</p>
+            <p class="grid-group-2">group2</p>
+            <p class="rest">rest</p>
           </div>
         </div>
       </section>
@@ -46,46 +54,70 @@
         <div class="container">
           <form id="time-setup" autocomplete="off" spellcheck="false">
             <div class="input-group">
-              <label for="number-of-sets">Number of Sets</label>
+              <label for="number-of-sets">number of sets :</label>
               <input type="number" id="number-of-sets" value="3" />
             </div>
-            <div class="input-group time">
-              <label>First Plank Duration</label>
-              <input type="number" id="first-plank-duration-minute" value="1" />
-              <label for="first-plank-duration-minute">minutes</label>
-              <input type="number" id="first-plank-duration-second" value="0" />
-              <label for="first-plank-duration-second">seconds</label>
+            <div class="input-group">
+              <label>plank duration :</label>
+              <div class="time">
+                <input type="number" id="plank-duration-minute" value="1" />
+                <label for="plank-duration-minute">minute(s)</label>
+                <input type="number" id="plank-duration-second" value="0" />
+                <label for="plank-duration-second">second(s)</label>
+              </div>
             </div>
-            <div class="input-group time">
-              <label>Side Plank Duration</label>
-              <input type="number" id="first-plank-duration-minute" value="0" />
-              <label for="first-plank-duration-minute">minutes</label>
-              <input
-                type="number"
-                id="first-plank-duration-second"
-                value="30"
-              />
-              <label for="first-plank-duration-second">seconds</label>
+            <div class="input-group">
+              <label>side plank duration :</label>
+              <div class="time">
+                <input
+                  type="number"
+                  id="side-plank-duration-minute"
+                  value="0"
+                />
+                <label for="side-plank-duration-minute">minute(s)</label>
+                <input
+                  type="number"
+                  id="side-plank-duration-second"
+                  value="30"
+                />
+                <label for="side-plank-duration-second">second(s)</label>
+              </div>
             </div>
-            <label>Rest Between Sets</label>
-            <input type="number" id="rest-between-sets-minute" value="1" />
-            <label for="rest-between-sets-minute">minutes</label>
-            <input type="number" id="rest-between-sets-second" value="0" />
-            <label for="rest-between-sets-second">seconds</label>
-            <button type="submit" id="start-btn" class="btn btn-primary">
+            <div class="input-group">
+              <label>rest between sets :</label>
+              <div class="time">
+                <input type="number" id="rest-between-sets-minute" value="1" />
+                <label for="rest-between-sets-minute">minute(s)</label>
+                <input type="number" id="rest-between-sets-second" value="0" />
+                <label for="rest-between-sets-second">second(s)</label>
+              </div>
+            </div>
+            <button type="submit" id="start-btn" class="btn-circle btn-primary">
               START
             </button>
           </form>
         </div>
       </section>
     </header>
-    <main id="clock"></main>
+    <main id="clock">
+      <i id="exit-clock" class="fas fa-times-circle fa-2x"></i>
+      <div id="time-display">
+        <p id="current-time-display">00:30</p>
+        <button id="excercise-continue" class="btn-circle btn-dark">
+          OK
+        </button>
+      </div>
+    </main>
     <!-- <button id="btn-play">play</button>
     <button id="btn-stop">stop</button> -->
   </body>
   <script>
     let $ = id => document.getElementById(id);
+    const primary = '#f070a1';
+    const nav = '#4d6d9a';
   </script>
+  <script src="UI.js"></script>
+  <script src="Time.js"></script>
   <script src="Sound.js"></script>
   <script src="app.js"></script>
 </html>
