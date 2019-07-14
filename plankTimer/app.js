@@ -3,7 +3,9 @@ const count2 = new Sound('sound/count2.mp3');
 const count3 = new Sound('sound/count3.mp3');
 const count4 = new Sound('sound/count4.mp3');
 const count5 = new Sound('sound/count5.mp3');
-const count10 = new Sound('sound/count10.mp3');
+// const count10 = new Sound('sound/count10.mp3');
+const count10 = new Audio('sound/count10.mp3');
+count10.play();
 
 let x;
 let clock;
