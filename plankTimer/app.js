@@ -1,3 +1,12 @@
+const count1 = new Sound('sound/count1.mp3');
+const count2 = new Sound('sound/count2.mp3');
+const count3 = new Sound('sound/count3.mp3');
+const count4 = new Sound('sound/count4.mp3');
+const count5 = new Sound('sound/count5.mp3');
+const count10 = new Sound('sound/count10.mp3');
+
+let x;
+
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
   if (showingExample) {
@@ -52,10 +61,10 @@ $('start-btn').addEventListener('click', function(e) {
     const clock = new Clock(timeArray);
     console.log(clock);
 
-    let x = setInterval(function() {
+    x = setInterval(function() {
       console.log('x');
       if (clock.tick()) clearInterval(x);
-    }, 150);
+    }, 1000);
 
     UI.enlargeClock();
   } catch (error) {
@@ -65,9 +74,8 @@ $('start-btn').addEventListener('click', function(e) {
 
 $('exit-clock').addEventListener('click', function() {
   UI.minimizeClock();
+  clearInterval(x);
 });
-
-// const count = new Sound('../images/count-test.mp3');
 
 // $('btn-play').addEventListener('click', function() {
 //   count.play();
