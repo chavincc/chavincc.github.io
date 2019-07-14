@@ -49,7 +49,10 @@ $('start-btn').addEventListener('click', function(e) {
     setsCount = parseInt($('number-of-sets').value);
     if (setsCount <= 0) throw new Error('no set');
 
-    const timeArray = [new Time(0, 10, setup, 'get ready', true)];
+    const timeArray = [
+      new Time(0, 5, loading, 'testing audio', true),
+      new Time(0, 10, setup, 'get ready', true)
+    ];
     for (let i = 0; i < setsCount; i++) {
       timeArray.push(
         new Time(
