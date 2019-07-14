@@ -4,12 +4,15 @@ const count3 = new Audio('sound/count3.mp3');
 const count4 = new Audio('sound/count4.mp3');
 const count5 = new Audio('sound/count5.mp3');
 const count10 = new Audio('sound/count10.mp3');
-
+function playTarget(target) {
+  target.play();
+}
 let x;
 let clock;
 
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
+  playTarget(count5);
   if (showingExample) {
     $('example').style.display = 'none';
     $('view-example-btn').innerHTML = 'view example';

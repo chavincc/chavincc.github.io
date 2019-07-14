@@ -21,16 +21,16 @@ class Clock {
             time.second = 59;
           } else {
             time.second--;
-            if (time.second == 10) count10.play();
-            if (time.second == 5) count5.play();
-            if (time.second == 4) count4.play();
-            if (time.second == 3) count3.play();
-            if (time.second == 2) count2.play();
-            if (time.second == 1) count1.play();
+            if (time.second == 10) playTarget(count10);
+            if (time.second == 5) playTarget(count5);
+            if (time.second == 4) playTarget(count4);
+            if (time.second == 3) playTarget(count3);
+            if (time.second == 2) playTarget(count2);
+            if (time.second == 1) playTarget(count1);
           }
+          if (this.index < this.timeArray.length)
+            UI.showTime(this.timeArray[this.index]);
         }
-        if (this.index < this.timeArray.length)
-          UI.showTime(this.timeArray[this.index]);
       }
     }
   }
