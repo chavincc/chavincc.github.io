@@ -3,10 +3,7 @@ class UI {
     $('clock').style.display = 'block';
     $('clock').style.height = '100vh';
     $('clock').style.width = '100vw';
-    setTimeout(() => {
-      //   $('nav').style.backgroundColor = primary;
-      this.showClockChild();
-    }, 550);
+    this.showClockChild();
   }
 
   static minimizeClock() {
@@ -14,18 +11,19 @@ class UI {
     $('clock').style.height = '0';
     $('clock').style.width = '0';
     setTimeout(() => {
-      //   $('nav').style.backgroundColor = nav;
       $('clock').style.display = 'none';
     }, 550);
   }
 
   static hideClockChild() {
+    $('main-footer').style.display = 'block';
     $('exit-clock').style.display = 'none';
     $('time-display').style.display = 'none';
     $('excercise-continue').style.display = 'none';
   }
 
   static showClockChild() {
+    $('main-footer').style.display = 'none';
     $('exit-clock').style.display = 'block';
     $('time-display').style.display = 'block';
     $('excercise-continue').style.display = 'block';
@@ -40,8 +38,19 @@ class UI {
       else if (time.second === 4) count4.play();
       else if (time.second === 5) count5.play();
     }
-    const strmin = time.minute < 10 ? '0' + time.minute : time.minute;
-    const strsec = time.second < 10 ? '0' + time.second : time.second;
-    $('current-time-display').innerHTML = `${strmin}:${strsec}`;
+
+    if (time.autoContinue) {
+      $('current-time-display').style.display = 'block';
+      const strmin = time.minute < 10 ? '0' + time.minute : time.minute;
+      const strsec = time.second < 10 ? '0' + time.second : time.second;
+      $('current-time-display').innerHTML = `${strmin}:${strsec}`;
+      $('excercise-continue').style.display = 'none';
+    } else {
+      $('current-time-display').style.display = 'none';
+      $('excercise-continue').style.display = 'block';
+    }
+
+    $('clock').style.backgroundColor = time.color;
+    $('excercise-header').innerHTML = time.header;
   }
 }

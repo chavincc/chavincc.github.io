@@ -6,6 +6,7 @@ const count5 = new Sound('sound/count5.mp3');
 const count10 = new Sound('sound/count10.mp3');
 
 let x;
+let clock;
 
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
@@ -25,45 +26,76 @@ $('start-btn').addEventListener('click', function(e) {
     setsCount = parseInt($('number-of-sets').value);
     if (setsCount <= 0) throw new Error('no set');
 
-    const timeArray = [new Time(0, 10)];
+    const timeArray = [new Time(0, 10, setup, 'get ready', true)];
     for (let i = 0; i < setsCount; i++) {
       timeArray.push(
         new Time(
           $('plank-duration-minute').value,
-          $('plank-duration-second').value
+          $('plank-duration-second').value,
+          group1,
+          'plank',
+          true
         )
       );
       timeArray.push(
         new Time(
           $('side-plank-duration-minute').value,
-          $('side-plank-duration-second').value
+          $('side-plank-duration-second').value,
+          group1,
+          'side plank (left)',
+          true
         )
       );
       timeArray.push(
         new Time(
           $('side-plank-duration-minute').value,
-          $('side-plank-duration-second').value
+          $('side-plank-duration-second').value,
+          group1,
+          'side plank (right)',
+          true
         )
       );
       timeArray.push(
         new Time(
           $('plank-duration-minute').value,
-          $('plank-duration-second').value
+          $('plank-duration-second').value,
+          group1,
+          'plank',
+          true
         )
       );
       timeArray.push(
         new Time(
           $('rest-between-sets-minute').value,
-          $('rest-between-sets-second').value
+          $('rest-between-sets-second').value,
+          rest,
+          'rest',
+          true
         )
       );
     }
-    const clock = new Clock(timeArray);
+    for (let i = 0; i < setsCount; i++) {
+      timeArray.push(new Time(1, 1, group2, 'test', false));
+      timeArray.push(
+        new Time(
+          $('rest-between-sets-minute').value,
+          $('rest-between-sets-second').value,
+          rest,
+          'rest',
+          true
+        )
+      );
+    }
+
+    clock = new Clock(timeArray);
     console.log(clock);
 
     x = setInterval(function() {
       console.log('x');
-      if (clock.tick()) clearInterval(x);
+      if (clock.tick()) {
+        clearInterval(x);
+        UI.minimizeClock();
+      }
     }, 1000);
 
     UI.enlargeClock();
@@ -75,6 +107,10 @@ $('start-btn').addEventListener('click', function(e) {
 $('exit-clock').addEventListener('click', function() {
   UI.minimizeClock();
   clearInterval(x);
+});
+
+$('excercise-continue').addEventListener('click', function() {
+  clock.skipTime();
 });
 
 // $('btn-play').addEventListener('click', function() {

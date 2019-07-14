@@ -1,5 +1,5 @@
 class Time {
-  constructor(minute, second) {
+  constructor(minute, second, color, header, autoContinue) {
     if (isNaN(minute) || isNaN(second)) throw new Error('not a number');
     if (minute < 0 || second < 0) throw new Error('negative number');
     else {
@@ -14,21 +14,9 @@ class Time {
       }
       this.defMinute = this.minute;
       this.defSecond = this.second;
-    }
-  }
-
-  tick() {
-    if (this.minute === 0 && this.second === 0) return true;
-    else {
-      if (this.second === 0) {
-        this.minute--;
-        this.second = 59;
-      } else {
-        this.second--;
-      }
-      console.log('ok');
-      UI.showTime(this);
-      return false;
+      this.color = color;
+      this.header = header;
+      this.autoContinue = autoContinue;
     }
   }
 
