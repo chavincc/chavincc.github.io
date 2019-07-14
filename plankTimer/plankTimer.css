@@ -215,6 +215,9 @@ body {
 
 #exit-clock {
   color: #303030;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }
 
 #excercise-continue {

@@ -30,14 +30,14 @@ class UI {
   }
 
   static showTime(time) {
-    if (time.minute === 0) {
-      if (time.second === 10) count10.play();
-      else if (time.second === 1) count1.play();
-      else if (time.second === 2) count2.play();
-      else if (time.second === 3) count3.play();
-      else if (time.second === 4) count4.play();
-      else if (time.second === 5) count5.play();
-    }
+    // if (time.minute === 0) {
+    //   if (time.second === 10) count10.play();
+    //   else if (time.second === 1) count1.play();
+    //   else if (time.second === 2) count2.play();
+    //   else if (time.second === 3) count3.play();
+    //   else if (time.second === 4) count4.play();
+    //   else if (time.second === 5) count5.play();
+    // }
 
     if (time.autoContinue) {
       $('current-time-display').style.display = 'block';
