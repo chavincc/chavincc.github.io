@@ -1,18 +1,15 @@
-const count1 = new Sound('sound/count1.mp3');
-const count2 = new Sound('sound/count2.mp3');
-const count3 = new Sound('sound/count3.mp3');
-const count4 = new Sound('sound/count4.mp3');
-const count5 = new Sound('sound/count5.mp3');
-// const count10 = new Sound('sound/count10.mp3');
+const count1 = new Audio('sound/count1.mp3');
+const count2 = new Audio('sound/count2.mp3');
+const count3 = new Audio('sound/count3.mp3');
+const count4 = new Audio('sound/count4.mp3');
+const count5 = new Audio('sound/count5.mp3');
 const count10 = new Audio('sound/count10.mp3');
-count10.play();
 
 let x;
 let clock;
 
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
-  count10.play();
   if (showingExample) {
     $('example').style.display = 'none';
     $('view-example-btn').innerHTML = 'view example';
