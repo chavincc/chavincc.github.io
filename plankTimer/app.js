@@ -12,6 +12,7 @@ let clock;
 
 let showingExample = false;
 $('view-example-btn').addEventListener('click', function() {
+  count10.play();
   if (showingExample) {
     $('example').style.display = 'none';
     $('view-example-btn').innerHTML = 'view example';
