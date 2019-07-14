@@ -221,7 +221,7 @@ body {
 }
 
 #excercise-continue {
-  display: none;
+  /* display: none; */
 }
 
 #clock > * {

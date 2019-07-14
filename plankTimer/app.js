@@ -101,7 +101,7 @@ $('start-btn').addEventListener('click', function(e) {
       );
     }
     for (let i = 0; i < setsCount; i++) {
-      timeArray.push(new Time(1, 1, group2, 'test', false));
+      timeArray.push(new Time(99, 59, group2, 'cruch kicks & pulse up', true));
       timeArray.push(
         new Time(
           $('rest-between-sets-minute').value,

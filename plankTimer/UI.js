@@ -44,10 +44,10 @@ class UI {
       const strmin = time.minute < 10 ? '0' + time.minute : time.minute;
       const strsec = time.second < 10 ? '0' + time.second : time.second;
       $('current-time-display').innerHTML = `${strmin}:${strsec}`;
-      $('excercise-continue').style.display = 'none';
+      // $('excercise-continue').style.display = 'none';
     } else {
       $('current-time-display').style.display = 'none';
-      $('excercise-continue').style.display = 'block';
+      // $('excercise-continue').style.display = 'block';
     }
 
     $('clock').style.backgroundColor = time.color;

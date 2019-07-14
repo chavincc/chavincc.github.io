@@ -31,6 +31,10 @@ class Clock {
           if (this.index < this.timeArray.length)
             UI.showTime(this.timeArray[this.index]);
         }
+      } else {
+        if (time.minute === 0 && time.second === 0) {
+          this.index++;
+        }
       }
     }
   }
