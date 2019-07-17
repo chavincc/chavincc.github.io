@@ -1,9 +1,12 @@
 class UI {
   static enlargeClock() {
     $('clock').style.display = 'block';
-    $('clock').style.height = '100vh';
-    $('clock').style.width = '100vw';
-    this.showClockChild();
+    setTimeout(() => {
+      $('clock').style.height = '100vh';
+      $('clock').style.width = '100vw';
+    }, 100);
+
+    setTimeout(() => this.showClockChild(), 550);
   }
 
   static minimizeClock() {

@@ -21,20 +21,21 @@ class Clock {
             time.second = 59;
           } else {
             time.second--;
-            if (time.second == 10) playTarget(count10);
-            if (time.second == 5) playTarget(count5);
-            if (time.second == 4) playTarget(count4);
-            if (time.second == 3) playTarget(count3);
-            if (time.second == 2) playTarget(count2);
-            if (time.second == 1) playTarget(count1);
+            if (time.minute === 0) {
+              if (time.second === 10) playTarget(count10);
+              if (time.second === 5) playTarget(count5);
+              if (time.second === 4) playTarget(count4);
+              if (time.second === 3) playTarget(count3);
+              if (time.second === 2) playTarget(count2);
+              if (time.second === 1) playTarget(count1);
+            }
           }
           if (this.index < this.timeArray.length)
             UI.showTime(this.timeArray[this.index]);
         }
-      } else {
-        if (time.minute === 0 && time.second === 0) {
-          this.index++;
-        }
+      }
+      if (time.minute === 0 && time.second === 0) {
+        this.index++;
       }
     }
   }

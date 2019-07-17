@@ -112,12 +112,11 @@ $('start-btn').addEventListener('click', function(e) {
         )
       );
     }
+    timeArray.pop();
 
     clock = new Clock(timeArray);
-    console.log(clock);
 
     x = setInterval(function() {
-      console.log('x');
       if (clock.tick()) {
         clearInterval(x);
         UI.minimizeClock();
@@ -138,11 +137,3 @@ $('exit-clock').addEventListener('click', function() {
 $('excercise-continue').addEventListener('click', function() {
   clock.skipTime();
 });
-
-// $('btn-play').addEventListener('click', function() {
-//   count.play();
-// });
-
-// $('btn-stop').addEventListener('click', function() {
-//   count.pause();
-// });
