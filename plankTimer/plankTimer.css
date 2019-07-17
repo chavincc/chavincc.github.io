@@ -212,11 +212,22 @@ body {
   margin-bottom: 2rem;
 }
 
+#exit-clock::after,
 #exit-clock {
-  color: #303030;
   position: absolute;
-  top: 2rem;
-  left: 2rem;
+  top: 4rem;
+  left: 2.5rem;
+  width: 25px;
+  height: 2px;
+  background-color: #303030;
+  transform: rotate(45deg);
+}
+
+#exit-clock::after {
+  content: '';
+  top: 0;
+  left: 0;
+  transform: rotate(90deg);
 }
 
 #clock > * {
