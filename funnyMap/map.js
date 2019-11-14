@@ -29,16 +29,4 @@ function initMap() {
       map: map
     });
   });
-
-  const legend = document.getElementById('legend');
-  for (var key in icons) {
-    const type = icons[key];
-    const name = type.name;
-    const icon = type.icon;
-    const div = document.createElement('div');
-    div.innerHTML = '<img src="' + icon + '"> ' + name;
-    legend.appendChild(div);
-  }
-
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 }
