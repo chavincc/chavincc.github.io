@@ -1,0 +1,11 @@
+@media screen and (min-width: 500px) {
+  body {
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 375px;
+    min-height: 100vh;
+    border: 5px solid black;
+    overflow-y: scroll;
+  }
+}

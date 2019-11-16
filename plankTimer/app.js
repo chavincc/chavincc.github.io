@@ -129,7 +129,7 @@ $('start-btn').addEventListener('click', function(e) {
   }
 });
 
-$('exit-clock').addEventListener('click', function() {
+$('exit-clock-container').addEventListener('click', function() {
   UI.minimizeClock();
   clearInterval(x);
 });

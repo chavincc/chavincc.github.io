@@ -20,6 +20,7 @@ class UI {
 
   static hideClockChild() {
     $('main-footer').style.display = 'block';
+    $('exit-clock-container').style.display = 'none';
     $('exit-clock').style.display = 'none';
     $('time-display').style.display = 'none';
     $('excercise-continue').style.display = 'none';
@@ -27,6 +28,7 @@ class UI {
 
   static showClockChild() {
     $('main-footer').style.display = 'none';
+    $('exit-clock-container').style.display = 'block';
     $('exit-clock').style.display = 'block';
     $('time-display').style.display = 'block';
     $('excercise-continue').style.display = 'block';
