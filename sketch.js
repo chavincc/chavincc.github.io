@@ -138,9 +138,9 @@ function draw() {
   rect(0, H * 0.8, W, H * 0.2);
   textAlign(CENTER);
   fill(255);
-  text('" big phone + luck = easy game. "', W * 0.5, H * 0.86);
+  text('" happy birthday shit head "', W * 0.5, H * 0.86);
   textAlign(LEFT);
-  text('-Albert Einstein', W * 0.5, H * 0.93);
+  text('- Barack Obama', W * 0.5, H * 0.93);
   fill(0);
   text('balls : ' + ballCount, W * 0.6, H * 0.07);
   text('time : ' + sec + '.' + msec, W * 0.6, H * 0.12);
