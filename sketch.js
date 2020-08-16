@@ -13,7 +13,6 @@ var msec = 0;
 var gameStage = 0; //0=mainMenu 1=gameOn 2=gameEnded
 var released = true;
 var firebaseDb;
-var dbScoreRef;
 var nameInput;
 var highScore = 0;
 
@@ -55,11 +54,10 @@ function setup() {
     databaseURL: 'https://the-mike-game.firebaseio.com',
     projectId: 'the-mike-game',
     storageBucket: 'the-mike-game.appspot.com',
-    messagingSenderId: '527097926733'
+    messagingSenderId: '527097926733',
   };
   firebase.initializeApp(config);
   firebaseDb = firebase.database();
-  dbScoreRef = firebaseDb.ref('eua');
 
   W = displayWidth;
   H = displayHeight;
@@ -104,9 +102,6 @@ function newBall() {
 function endGame() {
   if (sec + msec / 100 > highScore) {
     highScore = sec + msec / 100;
-    dbScoreRef.push(highScore);
-  } else {
-    dbScoreRef.remove('eua');
   }
   fill(250, 138, 134);
   ellipse(W / 2, H * 0.4, W * 0.02);
@@ -162,18 +157,18 @@ function Mike(W, H) {
   this.x = 0;
   this.y = 0;
 
-  this.show = function() {
+  this.show = function () {
     //ellipse(this.x, this.y, this.mainR, this.mainR);
     imageMode(CENTER);
     image(img, this.x, this.y, this.mainR, this.mainR);
   };
 
-  this.move = function() {
+  this.move = function () {
     this.angle += this.angularSpeed * dir;
     this.calculate();
   };
 
-  this.autopilot = function() {
+  this.autopilot = function () {
     for (var i = 0; i < ballCount; i++) {
       if (this.near(obstacles[i])) {
         keyPressed();
@@ -181,12 +176,12 @@ function Mike(W, H) {
     }
   };
 
-  this.calculate = function() {
+  this.calculate = function () {
     this.x = this.xCen + this.tunnelR * cos(this.angle);
     this.y = this.yCen + this.tunnelR * sin(this.angle);
   };
 
-  this.near = function(other) {
+  this.near = function (other) {
     let d = dist(this.x, this.y, other.x, other.y);
     if (d < this.mainR + other.r - imgBorder + 20) {
       return true;
@@ -194,7 +189,7 @@ function Mike(W, H) {
     return false;
   };
 
-  this.intersect = function(other) {
+  this.intersect = function (other) {
     let d = dist(this.x, this.y, other.x, other.y);
     if (d < this.mainR + other.r - imgBorder) {
       return true;
@@ -211,7 +206,7 @@ function BadBall() {
   this.ySpeed = random(-maxSpeed, maxSpeed);
   this.r = W * 0.02;
 
-  this.move = function() {
+  this.move = function () {
     if (this.x <= 0 || this.x >= W) {
       this.xSpeed = -this.xSpeed;
     }
@@ -222,7 +217,7 @@ function BadBall() {
     this.y = this.y + this.ySpeed;
   };
 
-  this.show = function() {
+  this.show = function () {
     fill(0);
     noStroke();
     ellipse(this.x, this.y, this.r, this.r);
